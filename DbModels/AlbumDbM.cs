@@ -12,7 +12,6 @@ namespace DbModels;
 [Table("Albums", Schema = "supusr")]
 public class AlbumDbM : Album, ISeed<AlbumDbM>
 {
-
     [Key]
     public override Guid AlbumId { get; set; }
 
