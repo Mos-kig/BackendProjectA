@@ -11,7 +11,7 @@
     <AssemblyVersion>1.2.0.0</AssemblyVersion>
     <FileVersion>1.2.0.0</FileVersion>
     <InformationalVersion>1.2.0.0</InformationalVersion>
-    <Copyright>Copyright © Seido AB $([System.DateTime]::UtcNow.Year)</Copyright>
+    <Copyright>Copyright © Moses Kigundu $([System.DateTime]::UtcNow.Year)</Copyright>
     <Description>This is an API used in Seido's various software developer training courses.</Description>
     <Company>Seido AB</Company>
     <Product>Seido Music API</Product>
