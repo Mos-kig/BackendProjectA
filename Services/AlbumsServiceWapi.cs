@@ -46,26 +46,38 @@ public class AlbumsServiceWapi : IAlbumsService
     public async Task<ResponseItemDto<IAlbum>> ReadAlbumAsync(Guid id, bool flat)
     {
         string uri = $"albums/readitem?id={id}&flat={flat}";
-
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.GetAsync(uri);
+        await response.EnsureSuccessStatusMessage();
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IAlbum>>(s, _jsonSettings);
+        return resp;
     }
     public async Task<ResponseItemDto<IAlbum>> DeleteAlbumAsync(Guid id)
     {
         string uri = $"albums/deleteitem/{id}";
-
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.DeleteAsync(uri);
+        await response.EnsureSuccessStatusMessage();
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IAlbum>>(s, _jsonSettings);
+        return resp;
     }
     public async Task<ResponseItemDto<IAlbum>> UpdateAlbumAsync(AlbumCUdto item)
     {
         string uri = $"albums/updateitem/{item.AlbumId}";
-
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.PutAsync(uri, null);
+        await response.EnsureSuccessStatusMessage();
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IAlbum>>(s, _jsonSettings);
+        return resp;
     }
     public async Task<ResponseItemDto<IAlbum>> CreateAlbumAsync(AlbumCUdto item)
     {
         string uri = $"albums/createitem";
-
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.PostAsync(uri, null);
+        await response.EnsureSuccessStatusMessage();
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IAlbum>>(s, _jsonSettings);
+        return resp;
     }
 }
 

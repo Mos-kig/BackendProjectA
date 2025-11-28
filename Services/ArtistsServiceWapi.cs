@@ -46,26 +46,38 @@ public class ArtistsServiceWapi : IArtistsService
     public async Task<ResponseItemDto<IArtist>> ReadArtistAsync(Guid id, bool flat)
     {
         string uri = $"artists/readitem?id={id}&flat={flat}";
-
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.GetAsync(uri);
+        await response.EnsureSuccessStatusMessage();
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IArtist>>(s, _jsonSettings);
+        return resp;
     }
     public async Task<ResponseItemDto<IArtist>> DeleteArtistAsync(Guid id)
     {
         string uri = $"artists/deleteitem/{id}";
-
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.DeleteAsync(uri);
+        await response.EnsureSuccessStatusMessage();
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IArtist>>(s, _jsonSettings);
+        return resp;
     }
     public async Task<ResponseItemDto<IArtist>> UpdateArtistAsync(ArtistCUdto item)
     {
         string uri = $"artists/updateitem/{item.ArtistId}";
-
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.PutAsync(uri, null);
+        await response.EnsureSuccessStatusMessage();
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IArtist>>(s, _jsonSettings);
+        return resp;
     }
     public async Task<ResponseItemDto<IArtist>> CreateArtistAsync(ArtistCUdto item)
     {
         string uri = $"artists/createitem";
-
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.PostAsync(uri, null);
+        await response.EnsureSuccessStatusMessage();
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IArtist>>(s, _jsonSettings);
+        return resp;
     }
 }
 
