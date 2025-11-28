@@ -77,7 +77,7 @@ public class AlbumsServiceWapi : IAlbumsService
         string uri = $"albums/createitem";
         string json = JsonConvert.SerializeObject(item);
         var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await _httpClient.PutAsync(uri, content);
+        HttpResponseMessage response = await _httpClient.PostAsync(uri, content);
         await response.EnsureSuccessStatusMessage();
         string s = await response.Content.ReadAsStringAsync();
         var resp = JsonConvert.DeserializeObject<ResponseItemDto<IAlbum>>(s, _jsonSettings);
