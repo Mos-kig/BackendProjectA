@@ -64,7 +64,9 @@ public class AlbumsServiceWapi : IAlbumsService
     public async Task<ResponseItemDto<IAlbum>> UpdateAlbumAsync(AlbumCUdto item)
     {
         string uri = $"albums/updateitem/{item.AlbumId}";
-        HttpResponseMessage response = await _httpClient.PutAsync(uri, null);
+        string json = JsonConvert.SerializeObject(item);
+        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        HttpResponseMessage response = await _httpClient.PutAsync(uri, content);
         await response.EnsureSuccessStatusMessage();
         string s = await response.Content.ReadAsStringAsync();
         var resp = JsonConvert.DeserializeObject<ResponseItemDto<IAlbum>>(s, _jsonSettings);
@@ -73,7 +75,9 @@ public class AlbumsServiceWapi : IAlbumsService
     public async Task<ResponseItemDto<IAlbum>> CreateAlbumAsync(AlbumCUdto item)
     {
         string uri = $"albums/createitem";
-        HttpResponseMessage response = await _httpClient.PostAsync(uri, null);
+        string json = JsonConvert.SerializeObject(item);
+        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        HttpResponseMessage response = await _httpClient.PutAsync(uri, content);
         await response.EnsureSuccessStatusMessage();
         string s = await response.Content.ReadAsStringAsync();
         var resp = JsonConvert.DeserializeObject<ResponseItemDto<IAlbum>>(s, _jsonSettings);

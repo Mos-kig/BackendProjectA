@@ -64,7 +64,9 @@ public class ArtistsServiceWapi : IArtistsService
     public async Task<ResponseItemDto<IArtist>> UpdateArtistAsync(ArtistCUdto item)
     {
         string uri = $"artists/updateitem/{item.ArtistId}";
-        HttpResponseMessage response = await _httpClient.PutAsync(uri, null);
+        string json = JsonConvert.SerializeObject(item);
+        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        HttpResponseMessage response = await _httpClient.PutAsync(uri, content);
         await response.EnsureSuccessStatusMessage();
         string s = await response.Content.ReadAsStringAsync();
         var resp = JsonConvert.DeserializeObject<ResponseItemDto<IArtist>>(s, _jsonSettings);
@@ -73,7 +75,9 @@ public class ArtistsServiceWapi : IArtistsService
     public async Task<ResponseItemDto<IArtist>> CreateArtistAsync(ArtistCUdto item)
     {
         string uri = $"artists/createitem";
-        HttpResponseMessage response = await _httpClient.PostAsync(uri, null);
+        string json = JsonConvert.SerializeObject(item);
+        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        HttpResponseMessage response = await _httpClient.PutAsync(uri, content);
         await response.EnsureSuccessStatusMessage();
         string s = await response.Content.ReadAsStringAsync();
         var resp = JsonConvert.DeserializeObject<ResponseItemDto<IArtist>>(s, _jsonSettings);
